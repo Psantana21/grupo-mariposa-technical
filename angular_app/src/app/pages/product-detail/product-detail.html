@@ -1,0 +1,32 @@
+
+<main class="product-detail-page">
+  <a routerLink="/products">← Back to Products</a>
+
+  @if (loading()) {
+    <p>Loading product details...</p>
+  } @else if (error()) {
+    <div>
+      <p>{{ error() }}</p>
+      <button type="button" (click)="loadProduct()">Retry</button>
+    </div>
+  } @else if (product(); as item) {
+    <article class="product-detail">
+      <img
+        [src]="item.thumbnail"
+        [alt]="item.title"
+        width="300"
+        height="300"
+      />
+
+      <div class="product-info">
+        <h1>{{ item.title }}</h1>
+
+        <p>{{ item.description }}</p>
+
+        <h2>${{ item.price }}</h2>
+
+        <p>⭐ Rating: {{ item.rating }}</p>
+      </div>
+    </article>
+  }
+</main>

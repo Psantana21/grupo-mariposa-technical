@@ -1,0 +1,27 @@
+<main class="products-page">
+    <h1>Products</h1>
+
+
+    <div class="search-container">
+        <label for="product-search">Search products</label>
+
+        <input id="product-search" type="search" placeholder="Search by product name..." [value]="searchQuery()"
+            (input)="onSearch($any($event.target).value)" />
+    </div>
+
+
+    @if (loading()) {
+    <p>Loading products...</p>
+    } @else if (error()) {
+    <div>
+        <p>{{ error() }}</p>
+        <button type="button" (click)="loadProducts()">Retry</button>
+    </div>
+    } @else {
+    <div class="products-grid">
+        @for (product of products(); track product.id) {-
+        <app-product-card [product]="product" />
+        }
+    </div>
+    }
+</main>
