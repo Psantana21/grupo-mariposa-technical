@@ -4,6 +4,19 @@
         <p>Consulta y administra los pedidos registrados.</p>
     </header>
 
+
+    <div class="demo-notice" role="note">
+        <strong>Demo Environment — Simulated Orders</strong>
+        <p>
+            The orders displayed on this page are sample data retrieved
+            from the DummyJSON API. They are used solely to demonstrate
+            the order management workflow, including data fetching,
+            filtering, and order details. No real purchases or
+            customer transactions are involved.
+        </p>
+    </div>
+
+
     @if (selectedOrder(); as order) {
     <section class="order-detail">
         <h2>Detalle del pedido #{{ order.id }}</h2>

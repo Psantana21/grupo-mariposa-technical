@@ -106,3 +106,25 @@
         }
     }
 }
+
+.demo-notice {
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-left: 4px solid #0284c7;
+    border-radius: 10px;
+    color: #0c4a6e;
+
+    strong {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+
+    p {
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+}
