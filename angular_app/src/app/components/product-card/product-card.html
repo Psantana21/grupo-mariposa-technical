@@ -1,3 +1,4 @@
+
 <article class="product-card">
   <a [routerLink]="['/products', product().id]">
     <img
@@ -13,4 +14,12 @@
       <p>⭐ {{ product().rating }}</p>
     </div>
   </a>
+
+  <button
+    type="button"
+    class="add-to-cart-button"
+    (click)="addToCart()"
+  >
+    🛒 Add to Cart
+  </button>
 </article>

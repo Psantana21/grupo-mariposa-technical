@@ -4,6 +4,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product';
+import { CartService } from '../../services/cart';
 
 @Component({
   selector: 'app-product-detail',
@@ -14,6 +15,7 @@ import { ProductService } from '../../services/product';
 export class ProductDetail implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly productService = inject(ProductService);
+  private readonly cartService = inject(CartService);
 
   readonly product = signal<Product | null>(null);
   readonly loading = signal(true);
@@ -49,5 +51,13 @@ export class ProductDetail implements OnInit {
         this.loading.set(false);
       },
     });
+  }
+
+  addToCart(): void {
+    const selectedProduct = this.product();
+
+    if (selectedProduct) {
+      this.cartService.addProduct(selectedProduct);
+    }
   }
 }

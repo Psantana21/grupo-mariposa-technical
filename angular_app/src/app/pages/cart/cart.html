@@ -1,0 +1,90 @@
+
+<main class="cart-page">
+  <a routerLink="/products" class="back-link">
+    ← Continue Shopping
+  </a>
+
+  <h1>Shopping Cart</h1>
+
+  @if (cartService.items().length === 0) {
+    <section class="empty-cart">
+      <h2>Your cart is empty</h2>
+      <p>Explore our products and add something you like.</p>
+      <a routerLink="/products">Browse Products</a>
+    </section>
+  } @else {
+    <div class="cart-layout">
+      <section class="cart-items">
+        @for (item of cartService.items(); track item.product.id) {
+          <article class="cart-item">
+            <img
+              [src]="item.product.thumbnail"
+              [alt]="item.product.title"
+              width="100"
+              height="100"
+            />
+
+            <div class="item-details">
+              <h2>{{ item.product.title }}</h2>
+              <p>${{ item.product.price.toFixed(2) }} each</p>
+
+              <div class="quantity-controls">
+                <button
+                  type="button"
+                  (click)="cartService.decreaseQuantity(item.product.id)"
+                  [attr.aria-label]="'Decrease quantity of ' + item.product.title"
+                >
+                  −
+                </button>
+
+                <span>{{ item.quantity }}</span>
+
+                <button
+                  type="button"
+                  (click)="cartService.increaseQuantity(item.product.id)"
+                  [attr.aria-label]="'Increase quantity of ' + item.product.title"
+                >
+                  +
+                </button>
+              </div>
+
+              <button
+                type="button"
+                class="remove-button"
+                (click)="cartService.removeProduct(item.product.id)"
+              >
+                Remove
+              </button>
+            </div>
+
+            <strong class="item-subtotal">
+              ${{ (item.product.price * item.quantity).toFixed(2) }}
+            </strong>
+          </article>
+        }
+      </section>
+
+      <aside class="cart-summary">
+        <h2>Order Summary</h2>
+
+        <div class="summary-row">
+          <span>Items</span>
+          <span>{{ cartService.itemCount() }}</span>
+        </div>
+
+        <div class="summary-row total-row">
+          <strong>Total</strong>
+          <strong>${{ cartService.total().toFixed(2) }}</strong>
+        </div>
+
+        <button
+          type="button"
+          class="clear-button"
+          (click)="cartService.clearCart()"
+        >
+          Clear Cart
+        </button>
+      </aside>
+    </div>
+  }
+</main>

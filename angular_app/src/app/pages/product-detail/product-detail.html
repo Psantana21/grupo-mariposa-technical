@@ -20,12 +20,21 @@
 
       <div class="product-info">
         <h1>{{ item.title }}</h1>
-
         <p>{{ item.description }}</p>
-
         <h2>${{ item.price }}</h2>
-
         <p>⭐ Rating: {{ item.rating }}</p>
+
+        <button
+          type="button"
+          class="add-to-cart-button"
+          (click)="addToCart()"
+        >
+          🛒 Add to Cart
+        </button>
+
+        <a routerLink="/cart" class="view-cart-link">
+          View Cart →
+        </a>
       </div>
     </article>
   }

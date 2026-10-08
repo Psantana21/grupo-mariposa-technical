@@ -1,1 +1,18 @@
+
+<header class="store-header">
+  <nav class="store-nav">
+    <a class="store-logo" routerLink="/products">
+      🛍️ Product Store
+    </a>
+
+    <div class="nav-links">
+      <a routerLink="/products">Products</a>
+
+      <a routerLink="/cart" class="cart-link">
+        🛒 Cart ({{ cartService.itemCount() }})
+      </a>
+    </div>
+  </nav>
+</header>
+
 <router-outlet />

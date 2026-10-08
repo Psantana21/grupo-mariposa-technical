@@ -15,6 +15,27 @@ The application retrieves product information from the DummyJSON REST API and de
 - Responsive product grid
 - Unit tests using Vitest
 
+
+## Shopping Cart
+
+The application includes a shopping cart implemented with Angular Signals.
+
+Features:
+- Add products from the catalog or product detail pages
+- Display a reactive cart counter in the navigation bar
+- Increase and decrease product quantities
+- Remove individual products
+- Clear the entire cart
+- Automatically calculate item subtotals and order totals
+- Display an empty-cart state
+
+Cart state is managed centrally through `CartService`, using
+Angular Signals and computed values.
+
+The cart is currently stored in memory and resets when the
+application is refreshed.
+
+
 ## Tech Stack
 
 - Angular 22
