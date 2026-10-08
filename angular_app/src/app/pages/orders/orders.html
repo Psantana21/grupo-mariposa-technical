@@ -1,0 +1,51 @@
+<main class="orders-page">
+    <header>
+        <h1>Panel de pedidos</h1>
+        <p>Consulta y administra los pedidos registrados.</p>
+    </header>
+
+    @if (selectedOrder(); as order) {
+    <section class="order-detail">
+        <h2>Detalle del pedido #{{ order.id }}</h2>
+
+        <p><strong>Cliente:</strong> #{{ order.userId }}</p>
+        <p><strong>Productos:</strong> {{ order.totalProducts }}</p>
+        <p><strong>Cantidad total:</strong> {{ order.totalQuantity }}</p>
+        <p><strong>Subtotal:</strong> ${{ order.total.toFixed(2) }}</p>
+        <p>
+            <strong>Total con descuento:</strong>
+            ${{ order.discountedTotal.toFixed(2) }}
+        </p>
+
+        <button type="button" (click)="closeDetails()">
+            Cerrar detalle
+        </button>
+    </section>
+    }
+
+    <div class="filter-container">
+        <label for="order-filter">Filtrar por usuario o total</label>
+
+        <input id="order-filter" type="search" placeholder="Ejemplo: 15 o 250" [value]="filter()"
+            (input)="onFilterChange($any($event.target).value)" />
+    </div>
+
+    @if (loading()) {
+    <p>Cargando pedidos...</p>
+    } @else if (error()) {
+    <div role="alert">
+        <p>{{ error() }}</p>
+        <button type="button" (click)="loadOrders()">Reintentar</button>
+    </div>
+    } @else {
+    <p>{{ filteredOrders().length }} pedidos encontrados</p>
+
+    <div class="orders-grid">
+        @for (order of filteredOrders(); track order.id) {
+        <app-order-card [order]="order" (viewDetails)="onViewDetails($event)" />
+        } @empty {
+        <p>No se encontraron pedidos.</p>
+        }
+    </div>
+    }
+</main>
